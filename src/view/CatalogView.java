@@ -1,16 +1,14 @@
 package view;
 
-import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.entries.general.MediaFile;
 
-public class CatalogViewService {
+public class CatalogView {
 
     private static Font        primaryFont     = new Font("Century Gothic", 14);
     private static ToggleGroup typeToggleGroup = new ToggleGroup();

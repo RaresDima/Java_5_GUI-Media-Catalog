@@ -11,7 +11,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        CatalogViewService.initRootLayout(this.primaryStage);
+        CatalogView.initRootLayout(this.primaryStage);
 
         primaryStage.show();
     }
