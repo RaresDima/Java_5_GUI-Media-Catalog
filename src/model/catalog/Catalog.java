@@ -31,12 +31,12 @@ public class Catalog {
             throw new IllegalArgumentException();
     }
     private void validatePath(StringProperty path)  throws IllegalPathException {
-        if (!path.get().matches("d:\\\\([\\w ]+\\\\)*[\\w ]+\\.mp[34]"))
+        if (!path.get().matches("[dD]:\\\\([\\w ]+\\\\)*[\\w ]+\\.mp[34]"))
             throw new IllegalPathException();
 
     }
 
-    private void add(MediaFile f)  {
+    public void add(MediaFile f)  {
         try {
             validateName(f.NAME);
             validateYear(f.YEAR);
@@ -47,12 +47,12 @@ public class Catalog {
         catch (IllegalYearException e) { ExceptionHandler.illegalYear(); e.printStackTrace(); }
         catch (IllegalPathException e) { ExceptionHandler.illegalPath(); e.printStackTrace(); }
     }
-    private void list()            {
+    public void list()            {
         for (MediaFile f : contents) {
-            System.out.println(f.toString());
+            System.out.println(f.toStringConsole());
         }
     }
-    private void play(String name) {
+    public void play(String name) {
         try {
             int i = -1;
             for (MediaFile f : this.contents) // Look for a file with the associated name
@@ -64,7 +64,7 @@ public class Catalog {
         catch (IOException e)          { ExceptionHandler.IO(); e.printStackTrace(); }
         catch (NoSuchMediaException e) { ExceptionHandler.noSuchMedia(); e.printStackTrace(); }
     }
-    private void save(String fileName) {
+    public void save(String fileName) {
         try {
             BufferedWriter fd = new BufferedWriter(new FileWriter(new File(fileName)));
 
@@ -82,7 +82,7 @@ public class Catalog {
         catch (IOException e)          { ExceptionHandler.IO();          e.printStackTrace(); }
         catch (IllegalPathException e) { ExceptionHandler.illegalPath(); e.printStackTrace(); }
     }
-    private void load(String path) {
+    public void load(String path) {
         try {
             BufferedReader fd = new BufferedReader(new FileReader(new File(path)));
             StringProperty tokenBuff = new SimpleStringProperty();
@@ -140,6 +140,9 @@ public class Catalog {
         catch (IllegalPathException e) { ExceptionHandler.illegalPath(); e.printStackTrace(); }
     }
 
+    public ObservableList<MediaFile> getContents() {
+        return contents;
+    }
 
     public void start() {
         Scanner user = new Scanner(System.in);

@@ -8,19 +8,4 @@ public class Track extends MediaFile {
         super(name, path, year, "Track");
     }
 
-    public String toString() {
-        StringBuilder buff = new StringBuilder("");
-
-        buff.append("\nTYPE: ");
-        buff.append(this.TYPE.get());
-        buff.append("\nNAME: ");
-        buff.append(this.NAME.get());
-        buff.append("\nLAUNCH YEAR: ");
-        buff.append(this.YEAR.get());
-        buff.append("\nPATH: ");
-        buff.append(this.PATH.get());
-        buff.append("\n");
-
-        return new String(buff);
-    }
 }

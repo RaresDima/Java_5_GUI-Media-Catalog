@@ -1,6 +1,8 @@
 package view;
 
+import controller.CatalogController;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
@@ -10,148 +12,258 @@ import model.entries.general.MediaFile;
 
 public class CatalogView {
 
-    private static Font        primaryFont     = new Font("Century Gothic", 14);
-    private static ToggleGroup typeToggleGroup = new ToggleGroup();
-    private static Stage primaryStageRef;
+    private static Stage primaryStage;
+
+    private static Group primaryGroup;
+
+    private static Font primaryFont;
+
+    private static TreeView<MediaFile> itemList;
+
+    private static Label typeLabel;
+    private static Label nameLabel;
+    private static Label pathLabel;
+
+    private static RadioButton trackButton;
+    private static RadioButton movieButton;
+    private static ToggleGroup typeToggleGroup;
+
+    private static TextField nameField;
+    private static TextField pathField;
+
+    private static Button addButton;
+    private static Button saveButton;
+    private static Button loadButton;
+    private static Button playButton;
+    private static Button exitButton;
+
 
 
 
     private static void initPrimaryStage(Stage primaryStage) {
-        primaryStageRef = primaryStage;
-        primaryStage.setTitle("Catalog");
-        primaryStage.setHeight(420.0);
-        primaryStage.setWidth(615.0);
+        CatalogView.primaryStage = primaryStage;
+        CatalogView.primaryStage.setTitle("Catalog");
+        CatalogView.primaryStage.setHeight(420.0);
+        CatalogView.primaryStage.setWidth(615.0);
     }
 
-    private static TreeView<MediaFile> initItemList() {
-        TreeView<MediaFile> itemList = new TreeView<>();
+    private static void initPrimaryFont() {
+        primaryFont = new Font("Century Gothic", 14);
+    }
 
+    private static void initItemList() {
+        itemList = new TreeView<>();
         itemList.setPrefSize(200,350);
-
         itemList.setLayoutX(15); itemList.setLayoutY(15);
-
-        return itemList;
+    }
+    private static void initItemList(TreeItem<MediaFile> root) {
+        itemList = new TreeView<>(root);
+        itemList.setPrefSize(200,350);
+        itemList.setLayoutX(15); itemList.setLayoutY(15);
     }
 
-    private static Label initTypeLabel () {
-        Label typeLabel = new Label("Type");
+    private static void initTypeLabel () {
+        typeLabel = new Label("Type");
         typeLabel.setFont(primaryFont);
         typeLabel.setPrefSize(50,25);
         typeLabel.setLayoutX(230); typeLabel.setLayoutY(15);
-        return typeLabel;
     }
-    private static Label initNameLabel () {
-        Label nameLabel = new Label("Name");
+    private static void initNameLabel () {
+        nameLabel = new Label("Name");
         nameLabel.setFont(primaryFont);
         nameLabel.setPrefSize(50,25);
         nameLabel.setLayoutX(230); nameLabel.setLayoutY(95);
-        return  nameLabel;
-
     }
-    private static Label initPathLabel () {
-        Label pathLabel = new Label("Path");
+    private static void initPathLabel () {
+        pathLabel = new Label("Path");
         pathLabel.setFont(primaryFont);
         pathLabel.setPrefSize(50,25);
         pathLabel.setLayoutX(230); pathLabel.setLayoutY(135);
-        return pathLabel;
     }
 
-    private static RadioButton initTrackButton() {
-        RadioButton trackButton = new RadioButton();
+    private static void initTypeToggleGroup() {
+        typeToggleGroup = new ToggleGroup();
+    }
+
+    private static void initTrackButton() {
+        trackButton = new RadioButton();
         trackButton.setFont(primaryFont);
         trackButton.setText("Track");
         trackButton.setPrefSize(150,25);
         trackButton.setLayoutX(295); trackButton.setLayoutY(15);
         trackButton.setToggleGroup(typeToggleGroup);
-        return trackButton;
     }
-    private static RadioButton initMovieButton() {
-        RadioButton movieButton = new RadioButton();
+    private static void initMovieButton() {
+        movieButton = new RadioButton();
         movieButton.setFont(primaryFont);
         movieButton.setText("Movie");
         movieButton.setPrefSize(150,25);
         movieButton.setLayoutX(295); movieButton.setLayoutY(50);
         movieButton.setToggleGroup(typeToggleGroup);
-        return movieButton;
     }
 
-    private static TextField initNameField() {
-        TextField nameField = new TextField();
+    private static void initNameField() {
+        nameField = new TextField();
         nameField.setPrefSize(150,25);
         nameField.setLayoutX(295); nameField.setLayoutY(95);
         nameField.setPromptText("Ex: Inception");
-        return nameField;
     }
-    private static TextField initPathField() {
-        TextField pathField = new TextField();
+    private static void initPathField() {
+        pathField = new TextField();
         pathField.setPrefSize(290,25);
         pathField.setLayoutX(295); pathField.setLayoutY(135);
         pathField.setPromptText("Ex: d:/movies/favourites/Inception.mp4");
-        return pathField;
     }
 
-    private static Button initAddButton()  {
-        Button addButton  = new Button("Add");
+    private static void initAddButton()  {
+        addButton  = new Button("Add");
         addButton .setFont(primaryFont);
         addButton .setPrefSize(50,25);
         addButton .setLayoutX(295); addButton .setLayoutY(175);
-        return addButton;
     }
-    private static Button initSaveButton() {
-        Button saveButton = new Button("Save");
+    private static void initSaveButton() {
+        saveButton = new Button("Save");
         saveButton.setFont(primaryFont);
         saveButton.setPrefSize(60,25);
         saveButton.setLayoutX(230); saveButton.setLayoutY(340);
-        return saveButton;
     }
-    private static Button initLoadButton() {
-        Button loadButton = new Button("Load");
+    private static void initLoadButton() {
+        loadButton = new Button("Load");
         loadButton.setFont(primaryFont);
         loadButton.setPrefSize(60,25);
         loadButton.setLayoutX(305); loadButton.setLayoutY(340);
-        return loadButton;
-
+        loadButton.setOnMouseClicked(event -> CatalogController.handleLoad());
     }
-    private static Button initPlayButton() {
-        Button playButton = new Button("Play");
+    private static void initPlayButton() {
+        playButton = new Button("Play");
         playButton.setFont(primaryFont);
         playButton.setPrefSize(50,25);
         playButton.setLayoutX(230); playButton.setLayoutY(300);
-        return playButton;
     }
-    private static Button initExitButton() {
-        Button exitButton = new Button("Exit");
+    private static void initExitButton() {
+        exitButton = new Button("Exit");
         exitButton.setFont(primaryFont);
         exitButton.setPrefSize(50,25);
         exitButton.setLayoutX(535); exitButton.setLayoutY(340);
-        exitButton.setOnMouseClicked(event -> primaryStageRef.close());
-        return exitButton;
+        exitButton.setOnMouseClicked(event -> CatalogController.handleExit());
     }
-    
-    public static void initRootLayout(Stage primaryStage) {
-        // Setting initial window dimensions and title
+
+    private static void initPrimaryGroup() {
+        primaryGroup = new Group();
+        primaryGroup.getChildren().addAll(itemList);
+        primaryGroup.getChildren().addAll(typeLabel, nameLabel, pathLabel);
+        primaryGroup.getChildren().addAll(trackButton, movieButton);
+        primaryGroup.getChildren().addAll(nameField, pathField);
+        primaryGroup.getChildren().addAll(addButton, saveButton, loadButton, playButton, exitButton);
+    }
+
+    private static void initSceneElements(Stage primaryStage) {
         initPrimaryStage(primaryStage);
-        // Creating the group that will store all the other elements.
-        Group primaryGroup = new Group();
 
-        // Adding the tree view for the media items
-        primaryGroup.getChildren().addAll(initItemList());
+        initPrimaryFont();
 
-        // Adding labels for type, name and path
-        primaryGroup.getChildren().addAll(initTypeLabel(), initNameLabel(), initPathLabel());
+        initItemList();
 
-        // Adding the radio buttons for media type selection and setting toggle group
-        primaryGroup.getChildren().addAll(initTrackButton(), initMovieButton());
+        initTypeLabel();
+        initNameLabel();
+        initPathLabel();
 
-        // Adding the text boxes for data input necessary for "add" function
-        primaryGroup.getChildren().addAll(initNameField(), initPathField());
+        initTypeToggleGroup();
+        initTrackButton();
+        initMovieButton();
 
-        // Adding the load, save, add, play and exit buttons
-        primaryGroup.getChildren().addAll(initAddButton(), initSaveButton(), initLoadButton(), initPlayButton(), initExitButton());
+        initNameField();
+        initPathField();
 
-        // Putting the finalized group into a scene and passing it to the primary stage
+        initAddButton();
+        initSaveButton();
+        initLoadButton();
+        initPlayButton();
+        initExitButton();
+
+        initPrimaryGroup();
+    }
+
+    public static void setPrimaryScene(Stage primaryStage) {
+        initSceneElements(primaryStage);
         Scene primaryScene = new Scene(primaryGroup);
         primaryStage.setScene(primaryScene);
+    }
+    public static void loadTree(TreeItem<MediaFile> root) {
+        for (Node n : primaryGroup.getChildren())
+            if (n.equals(itemList)) {
+                primaryGroup.getChildren().remove(n);
+                break;
+            }
+        initItemList(root);
+        primaryGroup.getChildren().add(itemList);
+        primaryGroup = new Group(primaryGroup);
+        Scene newPrimaryScene = new Scene(primaryGroup);
+        primaryStage.setScene(newPrimaryScene);
+    }
 
+
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static TreeView<MediaFile> getItemList() {
+        return itemList;
+    }
+
+    public static Label getTypeLabel() {
+        return typeLabel;
+    }
+    public static Label getNameLabel() {
+        return nameLabel;
+    }
+    public static Label getPathLabel() {
+        return pathLabel;
+    }
+
+    public static RadioButton getTrackButton() {
+        return trackButton;
+    }
+    public static RadioButton getMovieButton() {
+        return movieButton;
+    }
+
+    public static TextField getNameField() {
+        return nameField;
+    }
+    public static TextField getPathField() {
+        return pathField;
+    }
+
+    public static Button getAddButton() {
+        return addButton;
+    }
+    public static Button getSaveButton() {
+        return saveButton;
+    }
+    public static Button getLoadButton() {
+        return loadButton;
+    }
+    public static Button getPlayButton() {
+        return playButton;
+    }
+    public static Button getExitButton() {
+        return exitButton;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
