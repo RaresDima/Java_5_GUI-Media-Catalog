@@ -11,6 +11,7 @@ import view.CatalogView;
 public class CatalogController {
 
     private static Stage primaryStage;
+    private static Catalog catalog = new Catalog();
 
     public static void initView(Stage primaryStage) {
         CatalogController.primaryStage = primaryStage;
@@ -21,12 +22,16 @@ public class CatalogController {
         primaryStage.close();
     }
     public static void handleLoad() {
-        CatalogView.loadTree(CatalogController.list());
+        CatalogView.loadTree(CatalogController.loadMediaItems());
         primaryStage.show();
     }
+    public static void handlePlay() {
+        System.out.println("CatalogController.handlePlay");
+        catalog.play(CatalogView.getItemList().getSelectionModel().getSelectedItem().getValue().NAME.get());
+    }
 
-    private static TreeItem<MediaFile> list() {
-        Catalog catalog = new Catalog();
+
+    private static TreeItem<MediaFile> loadMediaItems() {
         catalog.load("D:\\Intellij Projects\\Java_5\\src\\model\\catalog\\saveFile.txt");
 
         TreeItem<MediaFile> root = new TreeItem<>(new Movie("Items", "0", 0));
@@ -45,4 +50,6 @@ public class CatalogController {
         }
         return root;
     }
+
+
 }

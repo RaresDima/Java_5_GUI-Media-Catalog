@@ -8,6 +8,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import view.CatalogView;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
 public class Main extends Application {
 
     private Stage primaryStage;
@@ -21,7 +25,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         launch(args);
     }
 }

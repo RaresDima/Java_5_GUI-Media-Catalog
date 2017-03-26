@@ -139,6 +139,8 @@ public class CatalogView {
         playButton.setFont(primaryFont);
         playButton.setPrefSize(50,25);
         playButton.setLayoutX(230); playButton.setLayoutY(300);
+        playButton.setOnMouseClicked(event -> CatalogController.handlePlay());
+        System.out.println("CatalogView.initPlayButton");
     }
     private static void initExitButton() {
         exitButton = new Button("Exit");

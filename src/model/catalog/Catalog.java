@@ -1,5 +1,6 @@
 package model.catalog;
 
+import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -60,7 +61,8 @@ public class Catalog {
                     i = this.contents.indexOf(f);
             if (i == -1)
                 throw new NoSuchMediaException(); // Not found exception
-            Runtime.getRuntime().exec("rundll32 SHELL32.DLL,ShellExec_RunDLL " + this.contents.get(i).PATH); }
+            System.out.println("Catalog.play " + i);
+            Runtime.getRuntime().exec("rundll32 SHELL32.DLL,ShellExec_RunDLL " + this.contents.get(i).PATH.get());}
         catch (IOException e)          { ExceptionHandler.IO(); e.printStackTrace(); }
         catch (NoSuchMediaException e) { ExceptionHandler.noSuchMedia(); e.printStackTrace(); }
     }
