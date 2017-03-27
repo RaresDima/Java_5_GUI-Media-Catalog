@@ -45,9 +45,6 @@ public class CatalogController {
         primaryStage.close();
     }
 
-
-
-
     private static TreeItem<MediaFile> loadMediaItems() {
         catalog.load(catalog.getSavePath());
 
@@ -67,6 +64,4 @@ public class CatalogController {
         }
         return root;
     }
-
-
 }

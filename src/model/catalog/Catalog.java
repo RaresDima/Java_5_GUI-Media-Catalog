@@ -215,6 +215,6 @@ public class Catalog {
     }
 
     public String getSavePath() {
-        return new String("D:\\Intellij Projects\\Java_5\\src\\model\\catalog\\saveFile.txt");
+        return "D:\\Intellij Projects\\Java_5\\src\\model\\catalog\\saveFile.txt";
     }
 }

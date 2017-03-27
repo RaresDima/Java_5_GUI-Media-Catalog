@@ -39,4 +39,9 @@ Track
 JBieber - Baby
 2000
 d:\music\JBIsLove\baby.mp3
+startObject
+Track
+Test
+2000
+d:\music\test.mp3
 endFile

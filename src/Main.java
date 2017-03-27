@@ -4,6 +4,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private Stage primaryStage;
 
     @Override

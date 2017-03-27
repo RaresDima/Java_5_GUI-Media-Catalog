@@ -41,7 +41,6 @@ public class CatalogView {
 
 
 
-
     private static void initPrimaryStage(Stage primaryStage) {
         CatalogView.primaryStage = primaryStage;
         CatalogView.primaryStage.setTitle("Catalog");
