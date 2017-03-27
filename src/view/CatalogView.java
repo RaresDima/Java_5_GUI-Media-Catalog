@@ -23,6 +23,7 @@ public class CatalogView {
     private static Label typeLabel;
     private static Label nameLabel;
     private static Label pathLabel;
+    private static Label yearLabel;
 
     private static RadioButton trackButton;
     private static RadioButton movieButton;
@@ -30,6 +31,7 @@ public class CatalogView {
 
     private static TextField nameField;
     private static TextField pathField;
+    private static TextField yearField;
 
     private static Button addButton;
     private static Button saveButton;
@@ -62,23 +64,29 @@ public class CatalogView {
         itemList.setLayoutX(15); itemList.setLayoutY(15);
     }
 
-    private static void initTypeLabel () {
+    private static void initTypeLabel() {
         typeLabel = new Label("Type");
         typeLabel.setFont(primaryFont);
         typeLabel.setPrefSize(50,25);
         typeLabel.setLayoutX(230); typeLabel.setLayoutY(15);
     }
-    private static void initNameLabel () {
+    private static void initNameLabel() {
         nameLabel = new Label("Name");
         nameLabel.setFont(primaryFont);
         nameLabel.setPrefSize(50,25);
         nameLabel.setLayoutX(230); nameLabel.setLayoutY(95);
     }
-    private static void initPathLabel () {
+    private static void initPathLabel() {
         pathLabel = new Label("Path");
         pathLabel.setFont(primaryFont);
         pathLabel.setPrefSize(50,25);
         pathLabel.setLayoutX(230); pathLabel.setLayoutY(135);
+    }
+    private static void initYearLabel() {
+        yearLabel = new Label("Year");
+        yearLabel.setFont(primaryFont);
+        yearLabel.setPrefSize(50,25);
+        yearLabel.setLayoutX(230); yearLabel.setLayoutY(175);
     }
 
     private static void initTypeToggleGroup() {
@@ -114,18 +122,26 @@ public class CatalogView {
         pathField.setLayoutX(295); pathField.setLayoutY(135);
         pathField.setPromptText("Ex: d:/movies/favourites/Inception.mp4");
     }
+    private static void initYearField() {
+        yearField = new TextField();
+        yearField.setPrefSize(60,25);
+        yearField.setLayoutX(295); yearField.setLayoutY(175);
+        yearField.setPromptText("Ex: 1978");
+    }
 
     private static void initAddButton()  {
-        addButton  = new Button("Add");
-        addButton .setFont(primaryFont);
-        addButton .setPrefSize(50,25);
-        addButton .setLayoutX(295); addButton .setLayoutY(175);
+        addButton = new Button("Add");
+        addButton.setFont(primaryFont);
+        addButton.setPrefSize(50,25);
+        addButton.setLayoutX(295); addButton .setLayoutY(215);
+        addButton.setOnMouseClicked(event -> CatalogController.handleAdd());
     }
     private static void initSaveButton() {
         saveButton = new Button("Save");
         saveButton.setFont(primaryFont);
         saveButton.setPrefSize(60,25);
         saveButton.setLayoutX(230); saveButton.setLayoutY(340);
+        saveButton.setOnMouseClicked(event -> CatalogController.handleSave());
     }
     private static void initLoadButton() {
         loadButton = new Button("Load");
@@ -153,9 +169,9 @@ public class CatalogView {
     private static void initPrimaryGroup() {
         primaryGroup = new Group();
         primaryGroup.getChildren().addAll(itemList);
-        primaryGroup.getChildren().addAll(typeLabel, nameLabel, pathLabel);
+        primaryGroup.getChildren().addAll(typeLabel, nameLabel, pathLabel, yearLabel);
         primaryGroup.getChildren().addAll(trackButton, movieButton);
-        primaryGroup.getChildren().addAll(nameField, pathField);
+        primaryGroup.getChildren().addAll(nameField, pathField, yearField);
         primaryGroup.getChildren().addAll(addButton, saveButton, loadButton, playButton, exitButton);
     }
 
@@ -169,6 +185,7 @@ public class CatalogView {
         initTypeLabel();
         initNameLabel();
         initPathLabel();
+        initYearLabel();
 
         initTypeToggleGroup();
         initTrackButton();
@@ -176,6 +193,7 @@ public class CatalogView {
 
         initNameField();
         initPathField();
+        initYearField();
 
         initAddButton();
         initSaveButton();
@@ -229,6 +247,9 @@ public class CatalogView {
     }
     public static RadioButton getMovieButton() {
         return movieButton;
+    }
+    public static ToggleGroup getTypeToggleGroup() {
+        return typeToggleGroup;
     }
 
     public static TextField getNameField() {

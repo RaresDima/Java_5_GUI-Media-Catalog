@@ -1,6 +1,5 @@
 package model.catalog;
 
-import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -17,6 +16,7 @@ import model.exception.handler.*;
 
 public class Catalog {
     private ObservableList<MediaFile> contents;
+
 
     public Catalog() {
         contents = FXCollections.observableArrayList();
@@ -80,6 +80,7 @@ public class Catalog {
             }
             fd.write("endFile");
             fd.close();
+            System.out.println("Saved!");
         }
         catch (IOException e)          { ExceptionHandler.IO();          e.printStackTrace(); }
         catch (IllegalPathException e) { ExceptionHandler.illegalPath(); e.printStackTrace(); }
@@ -211,5 +212,9 @@ public class Catalog {
 
             }
         }
+    }
+
+    public String getSavePath() {
+        return new String("D:\\Intellij Projects\\Java_5\\src\\model\\catalog\\saveFile.txt");
     }
 }

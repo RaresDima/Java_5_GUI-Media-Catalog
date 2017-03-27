@@ -34,4 +34,9 @@ Movie
 Helicopter
 2017
 d:\Intellij Projects\Java_4\Helicopter.mp4
+startObject
+Track
+JBieber - Baby
+2000
+d:\music\JBIsLove\baby.mp3
 endFile
